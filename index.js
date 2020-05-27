@@ -11,7 +11,7 @@ class MochaSpecTreeReporter {
     runner
       .on(EVENT_SUITE_BEGIN, (suite) => {
         if (!suite.root) {
-          this.puts(`${this.indent()}${this.marker()} ${suite.title}`);
+          this.puts(`${this.indent()}${this.suiteMarker()} ${suite.title}`);
         }
         this.increaseIndent();
       })
@@ -19,11 +19,11 @@ class MochaSpecTreeReporter {
         this.decreaseIndent();
       })
       .on(EVENT_TEST_PASS, (test) => {
-        this.puts(`${this.indent()}${this.marker()} ${test.title}`);
+        this.puts(`${this.indent()}- ${test.title}`);
       });
   }
 
-  marker () {
+  suiteMarker () {
     return (this._indents === 1) ? '###' : '-';
   }
 

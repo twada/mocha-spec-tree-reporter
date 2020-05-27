@@ -23,8 +23,8 @@ describe('MochaSpecTreeReporter', () => {
       fakeRunner.emit('pass', { title: 'top level `it`' });
       fakeRunner.emit('suite end', { title: '', root: true });
     });
-    it('top level `it` uses headings `###` at the beginning of a line, followed by a title', () => {
-      assert(actualLines[0] === '### top level `it`');
+    it('top level `it` uses bullet list marker `-` without indentation at the beginning of a line, followed by a title', () => {
+      assert.equal(actualLines[0], '- top level `it`');
     });
   });
 
