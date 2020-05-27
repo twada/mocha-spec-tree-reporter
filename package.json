@@ -1,0 +1,26 @@
+{
+  "name": "@twada/mocha-spec-tree-reporter",
+  "description": "Mocha reporter that generates API spec description for README",
+  "version": "0.0.0",
+  "author": {
+    "name": "Takuto Wada",
+    "email": "takuto.wada@gmail.com",
+    "url": "https://github.com/twada"
+  },
+  "devDependencies": {
+    "mocha": "^7.2.0"
+  },
+  "keywords": [
+    "mocha",
+    "reporter"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "npm run test:unit",
+    "test:unit": "mocha"
+  }
+}
