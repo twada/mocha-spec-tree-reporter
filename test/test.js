@@ -44,4 +44,25 @@ describe('MochaSpecTreeReporter', () => {
     });
   });
 
+  context('`it` enclosed in inner `describe`, that is enclosed in outer `describe`', () => {
+    beforeEach(() => {
+      fakeRunner.emit('suite', { title: '', root: true });
+      fakeRunner.emit('suite', { title: 'outer top level `describe`' });
+      fakeRunner.emit('suite', { title: 'inner `describe`' });
+      fakeRunner.emit('pass', { title: '`it`' });
+      fakeRunner.emit('suite end', { title: 'inner `describe`' });
+      fakeRunner.emit('suite end', { title: 'outer top level `describe`' });
+      fakeRunner.emit('suite end', { title: '', root: true });
+    });
+    it('outer top level `describe` uses headings `###` at the beginning of a line, followed by a title', () => {
+      assert(actualLines[0] === '### outer top level `describe`');
+    });
+    it('inner `describe` enclosed in outer `describe` uses bullet list marker `-` with indentation at the beginning of a line, followed by a title', () => {
+      assert(actualLines[1] === '  - inner `describe`');
+    });
+    it('`it` enclosed in inner `describe` uses bullet list marker `-` with indentation at the beginning of a line, followed by a title', () => {
+      assert(actualLines[2] === '    - `it`');
+    });
+  });
+
 });
