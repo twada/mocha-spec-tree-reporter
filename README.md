@@ -13,6 +13,9 @@ USAGE
 mocha test --reporter @twada/mocha-spec-tree-reporter
 ```
 
+SPEC
+---------------------------------------
+
 ### MochaSpecTreeReporter: generates API spec description for README
   - when rendering top level tests:
     - renders bullet list marker `-` at the beginning of a line, followed by test title
