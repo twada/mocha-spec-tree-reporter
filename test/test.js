@@ -6,7 +6,7 @@ const assert = require('assert').strict;
 const EventEmitter = require('events');
 class FakeRunner extends EventEmitter {}
 
-describe('MochaSpecTreeReporter', () => {
+describe('MochaSpecTreeReporter: generates API spec description for README', () => {
   let fakeRunner;
   let actualLines;
 
@@ -17,51 +17,51 @@ describe('MochaSpecTreeReporter', () => {
     reporter.puts = (line) => { actualLines.push(line); };
   });
 
-  context('top level `it`', () => {
+  context('when rendering top level tests:', () => {
     beforeEach(() => {
       fakeRunner.emit('suite', { title: '', root: true });
       fakeRunner.emit('pass', { title: 'top level `it`' });
       fakeRunner.emit('suite end', { title: '', root: true });
     });
-    it('top level `it` uses bullet list marker `-` without indentation at the beginning of a line, followed by a title', () => {
+    it('renders bullet list marker `-` at the beginning of a line, followed by test title', () => {
       assert.equal(actualLines[0], '- top level `it`');
     });
   });
 
-  context('`it` enclosed in `describe`', () => {
+  context('when top level suites enclose tests:', () => {
     beforeEach(() => {
       fakeRunner.emit('suite', { title: '', root: true });
       fakeRunner.emit('suite', { title: 'top level `describe`' });
-      fakeRunner.emit('pass', { title: '`it`' });
+      fakeRunner.emit('pass', { title: 'inner `it`' });
       fakeRunner.emit('suite end', { title: 'top level `describe`' });
       fakeRunner.emit('suite end', { title: '', root: true });
     });
-    it('top level `describe` uses headings `###` at the beginning of a line, followed by a title', () => {
-      assert(actualLines[0] === '### top level `describe`');
+    it('renders headings `###` at the beginning of a line, followed by top level suite title', () => {
+      assert.equal(actualLines[0], '### top level `describe`');
     });
-    it('`it` enclosed in `describe` uses bullet list marker `-` with indentation at the beginning of a line, followed by a title', () => {
-      assert(actualLines[1] === '  - `it`');
+    it('renders bullet list marker with indentation `  -` at the beginning of a line, followed by inner test title', () => {
+      assert.equal(actualLines[1], '  - inner `it`');
     });
   });
 
-  context('`it` enclosed in inner `describe`, that is enclosed in outer `describe`', () => {
+  context('when top level outer suites enclose inner suites, and inner suites enclose innermost tests:', () => {
     beforeEach(() => {
       fakeRunner.emit('suite', { title: '', root: true });
       fakeRunner.emit('suite', { title: 'outer top level `describe`' });
       fakeRunner.emit('suite', { title: 'inner `describe`' });
-      fakeRunner.emit('pass', { title: '`it`' });
+      fakeRunner.emit('pass', { title: 'the innermost `it`' });
       fakeRunner.emit('suite end', { title: 'inner `describe`' });
       fakeRunner.emit('suite end', { title: 'outer top level `describe`' });
       fakeRunner.emit('suite end', { title: '', root: true });
     });
-    it('outer top level `describe` uses headings `###` at the beginning of a line, followed by a title', () => {
-      assert(actualLines[0] === '### outer top level `describe`');
+    it('renders headings `###` at the beginning of a line, followed by top level outer suite title', () => {
+      assert.equal(actualLines[0], '### outer top level `describe`');
     });
-    it('inner `describe` enclosed in outer `describe` uses bullet list marker `-` with indentation at the beginning of a line, followed by a title', () => {
-      assert(actualLines[1] === '  - inner `describe`');
+    it('renders bullet list marker with indentation `  -` at the beginning of a line, followed by inner suite title', () => {
+      assert.equal(actualLines[1], '  - inner `describe`');
     });
-    it('`it` enclosed in inner `describe` uses bullet list marker `-` with indentation at the beginning of a line, followed by a title', () => {
-      assert(actualLines[2] === '    - `it`');
+    it('renders bullet list marker with double indentation `    -` at the beginning of a line, followed by innermost test title', () => {
+      assert.equal(actualLines[2], '    - the innermost `it`');
     });
   });
 
