@@ -20,7 +20,8 @@
     "access": "public"
   },
   "scripts": {
-    "test": "npm run test:unit",
-    "test:unit": "mocha"
+    "test:doc": "mocha --reporter index.js",
+    "test:unit": "mocha",
+    "test": "npm run test:unit"
   }
 }
