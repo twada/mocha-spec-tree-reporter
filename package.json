@@ -7,9 +7,11 @@
     "email": "takuto.wada@gmail.com",
     "url": "https://github.com/twada"
   },
+  "bugs": "https://github.com/twada/mocha-spec-tree-reporter/issues",
   "devDependencies": {
     "mocha": "^7.2.0"
   },
+  "homepage": "https://github.com/twada/mocha-spec-tree-reporter",
   "keywords": [
     "mocha",
     "reporter"
@@ -19,9 +21,13 @@
   "publishConfig": {
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/twada/mocha-spec-tree-reporter.git"
+  },
   "scripts": {
+    "test": "npm run test:unit",
     "test:doc": "mocha --reporter index.js",
-    "test:unit": "mocha",
-    "test": "npm run test:unit"
+    "test:unit": "mocha"
   }
 }
