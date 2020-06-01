@@ -3,6 +3,7 @@
 
 Mocha reporter that generates API spec description for README
 
+[![Build Status][travis-image]][travis-url]
 [![License][license-image]][license-url]
 
 
@@ -44,6 +45,9 @@ AUTHOR
 LICENSE
 ---------------------------------------
 Licensed under the [MIT](https://twada.mit-license.org) license.
+
+[travis-url]: https://travis-ci.org/twada/mocha-spec-tree-reporter
+[travis-image]: https://secure.travis-ci.org/twada/mocha-spec-tree-reporter.svg?branch=master
 
 [license-url]: https://twada.mit-license.org
 [license-image]: https://img.shields.io/badge/license-MIT-brightgreen.svg
