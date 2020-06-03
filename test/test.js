@@ -65,4 +65,32 @@ describe('MochaSpecTreeReporter: generates API spec description for README', () 
     });
   });
 
+  context('when multiple top level suites exist:', () => {
+    beforeEach(() => {
+      fakeRunner.emit('suite', { title: '', root: true });
+      fakeRunner.emit('suite', { title: 'top level suite 1' });
+      fakeRunner.emit('suite', { title: 'inner suite 1' });
+      fakeRunner.emit('pass', { title: 'inner test 1' });
+      fakeRunner.emit('suite end', { title: 'inner suite 1' });
+      fakeRunner.emit('suite end', { title: 'top level suite 1' });
+      fakeRunner.emit('suite', { title: 'top level suite 2' });
+      fakeRunner.emit('suite', { title: 'inner suite 2' });
+      fakeRunner.emit('pass', { title: 'inner test 2' });
+      fakeRunner.emit('suite end', { title: 'inner suite 2' });
+      fakeRunner.emit('suite end', { title: 'top level suite 2' });
+      fakeRunner.emit('suite end', { title: '', root: true });
+    });
+    it('insert blank line after each top level suite', () => {
+      assert.deepStrictEqual(actualLines, [
+        '### top level suite 1',
+        '  - inner suite 1',
+        '    - inner test 1',
+        '',
+        '### top level suite 2',
+        '  - inner suite 2',
+        '    - inner test 2',
+        '',
+      ]);
+    });
+  });
 });

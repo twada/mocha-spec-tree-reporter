@@ -17,14 +17,21 @@ class MochaSpecTreeReporter {
       })
       .on(EVENT_SUITE_END, (suite) => {
         this.decreaseIndent();
+        if (this.isTopLevel()) {
+          this.puts('');
+        }
       })
       .on(EVENT_TEST_PASS, (test) => {
         this.puts(`${this.indent()}- ${test.title}`);
       });
   }
 
+  isTopLevel () {
+    return this._indents === 1;
+  }
+
   suiteMarker () {
-    return (this._indents === 1) ? '###' : '-';
+    return this.isTopLevel() ? '###' : '-';
   }
 
   indent () {

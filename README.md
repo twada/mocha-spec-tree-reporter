@@ -28,6 +28,8 @@ SPEC
     - renders headings `###` at the beginning of a line, followed by top level outer suite title
     - renders bullet list marker with indentation `  -` at the beginning of a line, followed by inner suite title
     - renders bullet list marker with double indentation `    -` at the beginning of a line, followed by innermost test title
+  - when multiple top level suites exist:
+    - insert blank line after each top level suite
 
 
 INSTALL
