@@ -31,7 +31,8 @@
     "url": "git://github.com/twada/mocha-spec-tree-reporter.git"
   },
   "scripts": {
-    "test": "npm run test:unit",
+    "test": "npm run test:unit && npm run test:acceptance",
+    "test:acceptance": "mocha --reporter index.js | tail -`wc -l test/fixtures/default.txt | awk '{print $1}'` | diff -u test/fixtures/default.txt -",
     "test:doc": "mocha --reporter index.js",
     "test:unit": "mocha"
   }
