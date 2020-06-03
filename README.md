@@ -32,6 +32,12 @@ SPEC
     - insert blank line after each top level suite
 
 
+EXAMPLE
+---------------------------------------
+
+See self-hosting [tests](https://github.com/twada/mocha-spec-tree-reporter/blob/master/test/test.js) and its [output](https://github.com/twada/mocha-spec-tree-reporter/blob/master/test/fixtures/default.txt).
+
+
 INSTALL
 ---------------------------------------
 
