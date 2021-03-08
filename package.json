@@ -9,7 +9,7 @@
   },
   "bugs": "https://github.com/twada/mocha-spec-tree-reporter/issues",
   "devDependencies": {
-    "mocha": "^7.2.0"
+    "mocha": "^8.0.0"
   },
   "files": [
     "CHANGELOG.md",
